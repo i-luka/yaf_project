@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  gw:
+    build:
+      context: gw/docker
+      dockerfile: development/nginx/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/app
+  php-fpm:
+    build:
+      context: docker
+      dockerfile: development/php-fpm/Dockerfile
+    volumes:
+      - ./:/app
+    environment:
+      APP_ENV: local
+      APP_DEBUG: 1
+  web:
+    build:
+      context: docker
+      dockerfile: development/nginx/Dockerfile
+    volumes:
+      - ./:/app
+  db:
+    image: mariadb:10.5
+    restart: always
+    environment:
+#      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'true'
+      MYSQL_DATABASE: yaf
+      MYSQL_USER: yaf_user
+      MYSQL_PASSWORD: yaf_pwd
+      MYSQL_ROOT_PASSWORD: root_pwd
+    command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+    volumes:
+      - ./data/db:/var/lib/mysql

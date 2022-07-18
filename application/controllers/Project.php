@@ -1,0 +1,15 @@
+<?php
+
+namespace Error;
+
+use Yaf\Controller_Abstract;
+
+class Controller extends Controller_Abstract
+{
+    public function indexAction()
+    {
+        return $this->getResponse()->setBody([
+            'content' => 'some content'
+        ]);
+    }
+}

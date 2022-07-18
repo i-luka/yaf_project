@@ -1,0 +1,13 @@
+{
+    "name": "i.luka/yaf",
+    "description": "yaf project",
+    "type": "library",
+    "authors": [
+        {
+            "name": "i.luka"
+        }
+    ],
+    "require": {
+        "yaf/extras": "*"
+    }
+}
